@@ -30,7 +30,7 @@ const MOODS = [
   { 
     id: 'grumpy', 
     emoji: '😠', 
-    label: 'Merge Conflicts', 
+    label: 'Conflicts', 
     response: 'Growling at a massive Git conflict or DNS propagation issues? Walk away for 10 minutes. I know this pain well—fresh eyes and a hot cup of tea will make the resolution simple. 🦴' 
   }
 ];
@@ -47,43 +47,36 @@ const TREATS = [
 ];
 
 export default function SafeSpaceToolkit() {
-  const [activeTab, setActiveTab] = useState('mood'); // mood, treat
+  const [activeTab, setActiveTab] = useState('mood');
   const [selectedMood, setSelectedMood] = useState(null);
   const [currentTreat, setCurrentTreat] = useState('');
 
-  // Mood selector
-  const handleMoodSelect = (mood) => {
-    setSelectedMood(mood);
-  };
-
-  // Treat dispenser
+  const handleMoodSelect = (mood) => setSelectedMood(mood);
   const handleDispenseTreat = () => {
     const randomIdx = Math.floor(Math.random() * TREATS.length);
     setCurrentTreat(TREATS[randomIdx]);
   };
 
   return (
-    <div className="paper-grid" style={{ minHeight: '480px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      {/* Toolkit Nav Buttons */}
-      <div style={{ display: 'flex', borderBottom: '2px dashed rgba(0,0,0,0.1)', paddingBottom: '12px', gap: '15px' }}>
+    <div className="paper-grid toolkit-page">
+      {/* Tab nav */}
+      <div className="toolkit-tab-nav">
         <button 
           onClick={() => setActiveTab('mood')} 
-          className="handwriting" 
+          className="handwriting toolkit-tab-btn"
           style={{ 
-            background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.4rem', 
             color: activeTab === 'mood' ? 'var(--text-accent)' : 'var(--text-subtle)',
-            textDecoration: activeTab === 'mood' ? 'underline' : 'none', fontWeight: 'bold'
+            textDecoration: activeTab === 'mood' ? 'underline' : 'none'
           }}
         >
           🐾 Dev Mood Tracker
         </button>
         <button 
           onClick={() => setActiveTab('treat')} 
-          className="handwriting" 
+          className="handwriting toolkit-tab-btn"
           style={{ 
-            background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.4rem', 
             color: activeTab === 'treat' ? 'var(--text-accent)' : 'var(--text-subtle)',
-            textDecoration: activeTab === 'treat' ? 'underline' : 'none', fontWeight: 'bold'
+            textDecoration: activeTab === 'treat' ? 'underline' : 'none'
           }}
         >
           🥯 Treat Dispenser
@@ -100,7 +93,8 @@ export default function SafeSpaceToolkit() {
             <p style={{ margin: 0, fontSize: '0.95rem' }}>Click on the paw matching your current dev state for some supportive advice:</p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '10px' }}>
+          {/* 5-mood grid — becomes 3-col then 2-col on mobile */}
+          <div className="mood-grid">
             {MOODS.map((m) => (
               <motion.button 
                 key={m.id} 
@@ -116,12 +110,13 @@ export default function SafeSpaceToolkit() {
                 }}
               >
                 <span style={{ fontSize: '2rem' }}>{m.emoji}</span>
-                <span className="handwriting" style={{ fontSize: '1.1rem', whiteSpace: 'nowrap' }}>{m.label}</span>
+                <span className="handwriting" style={{ fontSize: '1rem', wordBreak: 'break-word', textAlign: 'center' }}>{m.label}</span>
               </motion.button>
             ))}
           </div>
 
-          <div style={{ minHeight: '130px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--inner-box-bg)', border: '2px dashed var(--inner-box-border)', borderRadius: '12px', padding: '15px', overflow: 'hidden', transition: 'background 0.3s, border-color 0.3s' }}>
+          {/* Mood response — image + text stacked on mobile */}
+          <div className="mood-response-box">
             <AnimatePresence mode="wait">
               {selectedMood ? (
                 <motion.div 
@@ -130,12 +125,12 @@ export default function SafeSpaceToolkit() {
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: -20, opacity: 0 }}
                   transition={{ type: 'spring', stiffness: 150, damping: 14 }}
-                  style={{ display: 'flex', alignItems: 'center', gap: '20px', width: '100%' }}
+                  className="mood-response-inner"
                 >
                   <motion.img 
                     src={beagleSleeping} 
                     alt="Vinie sleeping" 
-                    style={{ width: '95px', height: 'auto' }} 
+                    className="mood-beagle-img"
                     animate={{ rotate: [-2, 2, -2] }}
                     transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
                   />
@@ -143,14 +138,15 @@ export default function SafeSpaceToolkit() {
                     <h4 className="handwriting" style={{ fontSize: '1.3rem', margin: '0 0 5px 0', color: 'var(--text-accent)' }}>
                       My &amp; Vinie's Advice:
                     </h4>
-                    <p style={{ fontSize: '1rem', margin: 0, lineHeight: '1.4' }}>{selectedMood.response}</p>
+                    <p style={{ fontSize: '1rem', margin: 0, lineHeight: '1.5' }}>{selectedMood.response}</p>
                   </div>
                 </motion.div>
               ) : (
                 <motion.p 
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  style={{ className: 'handwriting', fontSize: '1.3rem', color: 'var(--text-subtle)', margin: 0 }}
+                  style={{ fontSize: '1.2rem', color: 'var(--text-subtle)', margin: 0 }}
+                  className="handwriting"
                 >
                   Select a code mood paw above to see our advice!
                 </motion.p>
@@ -189,7 +185,7 @@ export default function SafeSpaceToolkit() {
             🍖 Dispense Dev Treat
           </motion.button>
 
-          <div style={{ width: '100%', maxWidth: '450px', height: '140px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+          <div style={{ width: '100%', maxWidth: '450px', minHeight: '120px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <AnimatePresence mode="wait">
               {currentTreat ? (
                 <motion.div 
@@ -201,7 +197,7 @@ export default function SafeSpaceToolkit() {
                   className="treat-card" 
                   style={{ display: 'flex', gap: '15px', alignItems: 'center', textAlign: 'left', width: '100%' }}
                 >
-                  <span style={{ fontSize: '2.5rem' }}>🍖</span>
+                  <span style={{ fontSize: '2.5rem', flexShrink: 0 }}>🍖</span>
                   <div>
                     <h4 className="handwriting" style={{ fontSize: '1.3rem', color: 'var(--text-accent)', margin: '0 0 4px 0' }}>
                       Cozy Dev Treat:
@@ -213,9 +209,9 @@ export default function SafeSpaceToolkit() {
                 <motion.div 
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  style={{ border: '2px dashed var(--card-border)', borderRadius: '12px', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  style={{ border: '2px dashed var(--card-border)', borderRadius: '12px', width: '100%', padding: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                 >
-                  <p className="handwriting" style={{ fontSize: '1.25rem', color: 'var(--text-subtle)', margin: 0 }}>
+                  <p className="handwriting" style={{ fontSize: '1.2rem', color: 'var(--text-subtle)', margin: 0 }}>
                     Click the button to open a treat!
                   </p>
                 </motion.div>

@@ -84,7 +84,7 @@ export default function VinieBoard() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '15px', marginTop: '5px' }}
+        className="vinie-cards-grid"
       >
         {ITEMS.map((item) => (
           <motion.div 
@@ -140,18 +140,18 @@ export default function VinieBoard() {
               <h4 className="handwriting" style={{ fontSize: '1.4rem', color: 'var(--sticky-text)', margin: '0 0 5px 0', transition: 'color 0.3s' }}>
                 📝 Notebook Clip Details: {selectedItem.title}
               </h4>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', fontSize: '0.88rem' }}>
+              <div className="vinie-detail-grid">
                 <div>
                   <strong>Details:</strong>
-                  <p style={{ margin: '4px 0 0 0', lineHeight: '1.4' }}>{selectedItem.desc}</p>
+                  <p style={{ margin: '4px 0 0 0', lineHeight: '1.4', fontSize: '0.88rem' }}>{selectedItem.desc}</p>
                 </div>
-                <div style={{ borderLeft: '1.5px dashed var(--inner-box-border)', paddingLeft: '15px' }}>
+                <div className="vinie-detail-right">
                   <strong>Technologies &amp; Scope:</strong>
                   <code style={{ fontSize: '0.78rem', display: 'block', padding: '3px 6px', background: 'var(--inner-box-bg)', borderRadius: '4px', margin: '4px 0 8px 0', border: '1px solid var(--inner-box-border)', color: 'var(--text-main)', transition: 'background 0.3s, border-color 0.3s, color 0.3s' }}>
                     {selectedItem.tech}
                   </code>
                   <strong>Impact &amp; Goals:</strong>
-                  <p style={{ margin: '2px 0 0 0', lineHeight: '1.4', fontStyle: 'italic', color: 'var(--text-main)' }}>{selectedItem.impact}</p>
+                  <p style={{ margin: '2px 0 0 0', lineHeight: '1.4', fontStyle: 'italic', color: 'var(--text-main)', fontSize: '0.88rem' }}>{selectedItem.impact}</p>
                 </div>
               </div>
             </motion.div>
