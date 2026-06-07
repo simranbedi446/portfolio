@@ -314,4 +314,17 @@ export default function Notebook({ currentPage, setCurrentPage, isOpen, setIsOpe
 
                   {/* Main Scrollable Content Area */}
                   <div className="page-content" style={{ flexGrow: 1 }}>
-                 
+                    {renderActivePage()}
+                  </div>
+                </>
+              ) : (
+                /* Cover rendering inside the sheet frame */
+                <CoverPage onOpen={handleOpen} />
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+    </div>
+  );
+}
