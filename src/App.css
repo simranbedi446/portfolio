@@ -1,0 +1,615 @@
+/* Scrapbook & Notebook Layout Styles */
+
+.notebook-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+  perspective: 1200px;
+}
+
+/* Cardboard Binder backing: Light Kraft Board in Light Mode, Dark Leather in Dark Mode */
+.notebook-binder {
+  background: #e5dfd3; /* Cozy warm kraft cardboard */
+  background-image: 
+    radial-gradient(rgba(0,0,0,0.01) 1px, transparent 0),
+    linear-gradient(135deg, #eee8dc 0%, #dbd4c5 100%);
+  background-size: 4px 4px, 100% 100%;
+  border-radius: 18px;
+  padding: 16px 16px 16px 36px;
+  box-shadow: var(--notebook-shadow-light);
+  position: relative;
+  transition: all var(--transition-speed);
+  border: 4px solid #ccbfad;
+}
+
+.notebook-binder::before {
+  content: '';
+  position: absolute;
+  top: 8px; left: 8px; right: 8px; bottom: 8px;
+  border: 2px dashed rgba(92, 64, 51, 0.12); /* Craft paper stitching */
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.dark-mode .notebook-binder {
+  background: #2a1b16; /* Dark mahogany leather */
+  background-image: linear-gradient(135deg, #2e1e19 0%, #1c100c 100%);
+  border-color: #170d0a;
+  box-shadow: var(--notebook-shadow-dark);
+}
+
+.dark-mode .notebook-binder::before {
+  border-color: rgba(255,255,255,0.05);
+}
+
+/* Corner Guards: Silver Caps in Light Mode, Gold Caps in Dark Mode with Stamped Paw Prints */
+.corner-guard {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  z-index: 25;
+  transition: all var(--transition-speed);
+  filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.16));
+  --cap-fill-top-left: url(#cap-chrome-top-left);
+  --cap-fill-top-right: url(#cap-chrome-top-right);
+  --cap-fill-bottom-left: url(#cap-chrome-bottom-left);
+  --cap-fill-bottom-right: url(#cap-chrome-bottom-right);
+  --cap-stroke: #b5b5b5;
+  --paw-emboss: rgba(60, 56, 54, 0.25);
+  --paw-shadow: rgba(255, 255, 255, 0.45);
+}
+
+.corner-guard.top-left {
+  top: -2px; left: -2px;
+}
+
+.corner-guard.top-right {
+  top: -2px; right: -2px;
+}
+
+.corner-guard.bottom-left {
+  bottom: -2px; left: -2px;
+}
+
+.corner-guard.bottom-right {
+  bottom: -2px; right: -2px;
+}
+
+.dark-mode .corner-guard {
+  --cap-fill-top-left: url(#cap-gold-top-left);
+  --cap-fill-top-right: url(#cap-gold-top-right);
+  --cap-fill-bottom-left: url(#cap-gold-bottom-left);
+  --cap-fill-bottom-right: url(#cap-gold-bottom-right);
+  --cap-stroke: #b7950b;
+  --paw-emboss: rgba(18, 9, 7, 0.65);
+  --paw-shadow: rgba(255, 255, 255, 0.12);
+}
+
+/* Spiral Rings Overlay - metal loops entering holes */
+.spiral-rings {
+  position: absolute;
+  left: 26px;
+  top: 16px;
+  bottom: 16px;
+  width: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  z-index: 20;
+  pointer-events: none;
+  padding: 30px 0;
+  box-sizing: border-box;
+}
+
+.ring-loop {
+  width: 36px;
+  height: 8px; /* Delicate metal wire wireframe */
+  background: linear-gradient(180deg, 
+    #7a7a7a 0%, 
+    #f0f0f0 15%, 
+    #ffffff 30%, 
+    #a8a8a8 60%, 
+    #3c3c3c 85%, 
+    #888888 100%
+  );
+  border-radius: 4px;
+  box-shadow: 
+    1px 2px 3px rgba(0,0,0,0.18),
+    inset 0 1px 1px rgba(255,255,255,0.4);
+  margin: 9px 0;
+  transition: all var(--transition-speed);
+}
+
+.dark-mode .ring-loop {
+  background: linear-gradient(180deg, 
+    #5a5a5a 0%, 
+    #d8d8d8 15%, 
+    #ffffff 30%, 
+    #888888 60%, 
+    #1c1c1c 85%, 
+    #666666 100%
+  );
+  box-shadow: 
+    1px 2px 4px rgba(0,0,0,0.4),
+    inset 0 1px 1px rgba(255,255,255,0.3);
+}
+
+/* Hole Punch Indicators inside paper */
+.punched-holes {
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  z-index: 10;
+  pointer-events: none;
+  padding: 30px 0;
+  box-sizing: border-box;
+}
+
+.hole-punch {
+  width: 12px;
+  height: 12px;
+  background-color: #534c40; /* Dark shadow color showing through holes in light mode */
+  border-radius: 50%;
+  box-shadow: inset 2.5px 2.5px 4px rgba(0,0,0,0.45), 0.5px 0.5px 0px rgba(255,255,255,0.35);
+  transition: all var(--transition-speed);
+}
+
+.dark-mode .hole-punch {
+  background-color: #0c0705; /* Deep black-brown shade for dark mode */
+  box-shadow: inset 2.5px 2.5px 4px rgba(0,0,0,0.85), 0.5px 0.5px 0px rgba(255,255,255,0.08);
+}
+
+/* Notebook Page Sheet with 3D stacked pages shadows */
+.notebook-page {
+  min-height: 580px;
+  border-radius: 4px 14px 14px 4px;
+  position: relative;
+  background-color: var(--paper-bg-light);
+  color: var(--text-main);
+  transition: transform var(--transition-speed) ease-in-out, opacity 0.2s, background-color var(--transition-speed), color var(--transition-speed);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid rgba(0,0,0,0.12);
+  
+  /* 3D stacked sheets shadows in light mode */
+  box-shadow: 
+    1px 1px 0px #eae6df,
+    2px 2px 0px #e2ded7,
+    3px 3px 0px #dad6cf,
+    4px 4px 0px #d2cec7,
+    5px 5px 0px #cac6bf,
+    6px 6px 12px rgba(92, 64, 51, 0.08);
+}
+
+.dark-mode .notebook-page {
+  background-color: var(--paper-bg-dark);
+  color: var(--text-main);
+  border-left: 2px solid rgba(0,0,0,0.3);
+  box-shadow: 
+    1px 1px 0px #3c3935,
+    2px 2px 0px #35322e,
+    3px 3px 0px #2e2b27,
+    4px 4px 0px #272421,
+    5px 5px 12px rgba(0,0,0,0.5);
+}
+
+/* Side navigation tabs */
+.index-tabs {
+  position: absolute;
+  right: -58px;
+  top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 5;
+}
+
+.index-tab {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  padding: 15px 8px;
+  font-family: var(--font-handwriting);
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-radius: 0 8px 8px 0;
+  border: 2px solid rgba(0,0,0,0.12);
+  border-left: none;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.12);
+  transition: transform 0.2s, padding-left 0.2s, background-color var(--transition-speed);
+  user-select: none;
+}
+
+.index-tab:hover {
+  transform: translateX(4px);
+  padding-left: 12px;
+}
+
+.index-tab.active {
+  transform: translateX(8px);
+  padding-left: 14px;
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.18);
+}
+
+/* Theme Toggles container */
+.controls-bar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 12px;
+  z-index: 20;
+}
+
+.control-btn {
+  background: var(--paper-bg-light);
+  border: 2px solid #5c4033;
+  color: #5c4033;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-family: var(--font-handwriting);
+  font-size: 1.1rem;
+  font-weight: bold;
+  box-shadow: 2px 2px 0px #5c4033;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.1s;
+}
+
+.control-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px transparent;
+}
+
+.dark-mode .control-btn {
+  background: var(--paper-bg-dark);
+  border-color: #ebdbb2;
+  color: #ebdbb2;
+  box-shadow: 2px 2px 0px #ebdbb2;
+}
+
+/* Sketch Image Container */
+.sketch-img-container {
+  border: 3px solid rgba(0,0,0,0.08);
+  border-radius: 8px;
+  padding: 10px;
+  background: #fff;
+  transform: rotate(-1.5deg);
+  box-shadow: 2px 4px 10px rgba(0,0,0,0.05);
+  display: inline-block;
+  max-width: 100%;
+}
+
+.dark-mode .sketch-img-container {
+  background: #222;
+  border-color: rgba(255,255,255,0.1);
+}
+
+/* Tape graphic element */
+.tape-graphic {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%) rotate(2deg);
+  width: 90px;
+  height: 25px;
+  background: rgba(244, 233, 205, 0.5); /* Washi tape */
+  backdrop-filter: blur(1px);
+  border-left: 3px dashed rgba(0,0,0,0.1);
+  border-right: 3px dashed rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* Badges & Stamps */
+.beagle-badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  border: 3px dashed var(--beagle-gold);
+  border-radius: 50%;
+  width: 110px;
+  height: 110px;
+  justify-content: center;
+  transform: rotate(6deg);
+  color: var(--beagle-gold-dark);
+  font-family: var(--font-handwriting);
+  font-weight: bold;
+  padding: 5px;
+  background: rgba(198, 138, 76, 0.05);
+}
+
+.dark-mode .beagle-badge {
+  border-color: var(--beagle-gold-light);
+  color: var(--beagle-gold-light);
+}
+
+/* Interactive elements in SafeSpaceToolkit */
+.mood-paw-btn {
+  background: none;
+  border: 2px dashed rgba(0,0,0,0.15);
+  border-radius: 12px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.mood-paw-btn:hover {
+  transform: scale(1.05) rotate(-2deg);
+  border-color: var(--beagle-gold);
+  background: rgba(198, 138, 76, 0.05);
+}
+
+.dark-mode .mood-paw-btn {
+  border-color: rgba(255,255,255,0.2);
+}
+
+/* Treat Generator */
+.treat-card {
+  border: 2px solid rgba(0,0,0,0.12);
+  border-radius: 12px;
+  padding: 20px;
+  background: #fdfaf2;
+  box-shadow: inset 0 0 15px rgba(198, 138, 76, 0.05), 3px 3px 6px rgba(0,0,0,0.04);
+  transform: rotate(1deg);
+  transition: transform 0.3s;
+}
+
+.dark-mode .treat-card {
+  background: #35322e;
+  border-color: rgba(255,255,255,0.1);
+}
+
+/* Scrapbook Clips / Cards for portfolio projects */
+.scrapbook-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 2px 4px 8px rgba(0,0,0,0.04);
+  padding: 12px;
+  transform: rotate(var(--rotation, 0deg));
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 4px;
+}
+
+.scrapbook-card:hover {
+  transform: rotate(0deg) scale(1.02);
+  box-shadow: 3px 8px 15px rgba(0,0,0,0.08);
+  z-index: 5;
+}
+
+.dark-mode .scrapbook-card {
+  background: #25221f;
+  border-color: rgba(255,255,255,0.15);
+}
+
+/* Custom Postcard Layout for Contact Page */
+.postcard-container {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 20px;
+  border: 2px solid #a68d70;
+  padding: 20px;
+  border-radius: 8px;
+  background: #fdfdfd;
+  position: relative;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.01);
+}
+
+.dark-mode .postcard-container {
+  background: #2b2824;
+  border-color: #5c4833;
+}
+
+.postcard-left {
+  border-right: 1px solid rgba(140, 115, 85, 0.25);
+  padding-right: 20px;
+}
+
+.postcard-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-left: 10px;
+}
+
+.stamp-box {
+  width: 70px;
+  height: 85px;
+  border: 2px dashed #a68d70;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-handwriting);
+  font-size: 0.9rem;
+  color: #a68d70;
+  text-align: center;
+  padding: 4px;
+  transform: rotate(4deg);
+}
+
+.postcard-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  font-family: var(--font-handwriting);
+  font-size: 1.25rem;
+  padding: 4px 0;
+  margin-bottom: 15px;
+  color: inherit;
+  outline: none;
+}
+
+.dark-mode .postcard-input {
+  border-bottom-color: rgba(255,255,255,0.15);
+}
+
+.postcard-textarea {
+  width: 100%;
+  height: 110px;
+  background: transparent;
+  border: none;
+  font-family: var(--font-handwriting);
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: inherit;
+  outline: none;
+  resize: none;
+  background-image: linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px);
+  background-size: 100% 28px;
+}
+
+.dark-mode .postcard-textarea {
+  background-image: linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+}
+
+/* Page corner folds / headers */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px dashed rgba(0,0,0,0.08);
+  padding: 15px 20px 15px 60px;
+  margin-bottom: 10px;
+}
+
+.dark-mode .page-header {
+  border-bottom-color: rgba(255,255,255,0.1);
+}
+
+.page-title {
+  margin: 0;
+  font-family: var(--font-handwriting);
+  font-size: 2.2rem;
+  color: var(--beagle-gold-dark);
+}
+
+.dark-mode .page-title {
+  color: var(--beagle-gold-light);
+}
+
+.page-content {
+  flex-grow: 1;
+  padding: 10px 25px 25px 60px;
+  font-size: 1.05rem;
+}
+
+/* Responsiveness adjustments */
+@media (max-width: 900px) {
+  .index-tabs {
+    position: relative;
+    right: 0;
+    top: 0;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    gap: 8px;
+  }
+  
+  .index-tab {
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    border-radius: 8px 8px 0 0;
+    border-left: 2px solid rgba(0,0,0,0.1);
+    border-bottom: none;
+    padding: 6px 12px;
+  }
+  
+  .index-tab:hover {
+    transform: translateY(-4px);
+    padding-left: 12px;
+  }
+  
+  .index-tab.active {
+    transform: translateY(-6px);
+    padding-left: 12px;
+  }
+  
+  .notebook-binder {
+    padding: 12px;
+  }
+  
+  .spiral-rings {
+    display: none;
+  }
+  
+  .punched-holes {
+    display: none;
+  }
+  
+  .notebook-page {
+    border-left: none;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.12);
+  }
+  
+  .page-header {
+    padding-left: 20px;
+  }
+  
+  .page-content {
+    padding-left: 20px;
+  }
+  
+  .postcard-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .postcard-left {
+    border-right: none;
+    border-bottom: 1px solid rgba(140, 115, 85, 0.3);
+    padding-right: 0;
+    padding-bottom: 20px;
+  }
+}
+
+/* Global placeholder styling for high contrast in dark/light modes */
+::placeholder {
+  color: var(--text-subtle);
+  opacity: 0.6;
+}
+
+/* Success Box wrapper */
+.success-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  border: 2px dashed #c8ebd1;
+  border-radius: 12px;
+  background: #f5fbf7;
+  padding: 30px;
+  text-align: center;
+  color: #2e7d32;
+  transition: all var(--transition-speed);
+}
+
+.success-box h4 {
+  color: #2e7d32;
+}
+
+.dark-mode .success-box {
+  background: #1b3022;
+  border-color: #2e5c3c;
+  color: #81c784;
+}
+
+.dark-mode .success-box h4 {
+  color: #81c784;
+}

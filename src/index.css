@@ -1,0 +1,239 @@
+:root {
+  /* Colors */
+  --bg-cozy-light: #f5efe6; /* Light cozy beige desk backdrop */
+  --bg-cozy-dark: #1b120f; /* Dark cozy mahogany desk backdrop */
+  
+  --desk-wood-light: #e8dfd2;
+  --desk-wood-dark: #120907;
+
+  --paper-bg-light: #fcfbf7;
+  --paper-bg-dark: #2d2a26;
+
+  --paper-line-light: rgba(74, 144, 226, 0.15);
+  --paper-line-dark: rgba(255, 255, 255, 0.08);
+
+  --paper-margin-light: rgba(210, 77, 87, 0.25);
+  --paper-margin-dark: rgba(210, 77, 87, 0.35);
+
+  --pencil-color-light: #3c3836;
+  --pencil-color-dark: #ebdbb2;
+
+  --pencil-subtle-light: #7c6f64;
+  --pencil-subtle-dark: #b8a994;
+
+  --collar-red: #d32f2f;
+  --collar-red-hover: #b71c1c;
+
+  --beagle-gold: #c68a4c;
+  --beagle-gold-light: #e3b27d;
+  --beagle-gold-dark: #8e5824;
+
+  /* Semantic Theme Tokens for High Readability */
+  --text-main: #3c3836;
+  --text-subtle: #7c6f64;
+  --text-accent: #8e5824;
+  --text-collar: #d32f2f;
+
+  --card-bg: #ffffff;
+  --card-border: rgba(0,0,0,0.08);
+
+  --bubble-bg: #fff9e6;
+  --bubble-border: #ecdca5;
+  --bubble-text: #5c4033;
+
+  --sticky-bg: #fffce6;
+  --sticky-border: #ecd872;
+  --sticky-text: #5c4033;
+
+  --inner-box-bg: #faf9f5;
+  --inner-box-border: #e5e4df;
+
+  /* Typography */
+  --font-handwriting: 'Caveat', cursive;
+  --font-sans: 'Nunito', sans-serif;
+
+  /* Premium Shadows */
+  --notebook-shadow-light: 
+    0 10px 25px rgba(92, 64, 51, 0.12), 
+    0 4px 10px rgba(92, 64, 51, 0.08);
+  --notebook-shadow-dark: 
+    0 15px 35px rgba(0,0,0,0.55), 
+    0 5px 15px rgba(0,0,0,0.4);
+  --transition-speed: 0.4s;
+}
+
+/* Base resets & theme styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  background-color: var(--bg-cozy-light);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+  overflow-x: hidden;
+  position: relative;
+  
+  /* Light mode: Cozy wood-dot desk background */
+  background-image: 
+    radial-gradient(var(--desk-wood-light) 1px, transparent 1px),
+    radial-gradient(var(--desk-wood-light) 1px, var(--bg-cozy-light) 1px);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+}
+
+/* Light mode lamp glow */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at 50% -10%, rgba(255, 255, 255, 0.4) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+body.dark-mode {
+  background-color: var(--bg-cozy-dark);
+  color: var(--text-main);
+  
+  /* Semantic Tokens for Dark Cozy Mode */
+  --text-main: #ebdbb2;
+  --text-subtle: #b8a994;
+  --text-accent: #e3b27d;
+  --text-collar: #ff6b6b;
+
+  --card-bg: #24211f;
+  --card-border: rgba(255,255,255,0.1);
+
+  --bubble-bg: #352e25;
+  --bubble-border: #524733;
+  --bubble-text: #ebdbb2;
+
+  --sticky-bg: #363223;
+  --sticky-border: #595230;
+  --sticky-text: #ebdbb2;
+
+  --inner-box-bg: #22201d;
+  --inner-box-border: #3d3b37;
+  
+  /* Dark mode: Cozy dark wood planks */
+  background-image: 
+    linear-gradient(90deg, rgba(0,0,0,0.25) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(0,0,0,0.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.005) 2px, transparent 2px);
+  background-size: 150px 100%, 100% 30px, 150px 100%;
+}
+
+body.dark-mode::before {
+  background: radial-gradient(circle at 50% -20%, rgba(253, 244, 219, 0.12) 0%, transparent 70%);
+}
+
+/* Main wrapper setup */
+#root {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--beagle-gold);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--beagle-gold-dark);
+}
+
+/* Utility classes */
+.handwriting {
+  font-family: var(--font-handwriting);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.text-center { text-align: center; }
+
+/* Micro-animations */
+@keyframes wag-tail {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(15deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes chew-bounce {
+  0%, 100% { transform: scale(1) translateY(0); }
+  30% { transform: scale(1.05) translateY(-5px); }
+  50% { transform: scale(0.95) translateY(2px); }
+  70% { transform: scale(1.02) translateY(-1px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-wag {
+  animation: wag-tail 0.8s ease-in-out infinite;
+  transform-origin: bottom right;
+}
+
+.animate-chew {
+  animation: chew-bounce 0.6s ease-in-out infinite;
+}
+
+/* Scrapbook Lined Paper Texture Utility */
+.paper-lined {
+  background-color: var(--paper-bg-light);
+  background-image: 
+    linear-gradient(var(--paper-line-light) 1px, transparent 1px),
+    linear-gradient(90deg, var(--paper-margin-light) 2px, transparent 2px);
+  background-size: 100% 28px, 100% 100%;
+  background-position: 0 0, 45px 0;
+  line-height: 28px;
+  padding-left: 60px !important;
+  padding-right: 30px !important;
+}
+
+.dark-mode .paper-lined {
+  background-color: var(--paper-bg-dark);
+  background-image: 
+    linear-gradient(var(--paper-line-dark) 1px, transparent 1px),
+    linear-gradient(90deg, var(--paper-margin-dark) 2px, transparent 2px);
+  background-size: 100% 28px, 100% 100%;
+}
+
+/* Scrapbook Grid Paper Texture Utility */
+.paper-grid {
+  background-color: var(--paper-bg-light);
+  background-image: 
+    linear-gradient(var(--paper-line-light) 1px, transparent 1px),
+    linear-gradient(90deg, var(--paper-line-light) 1px, transparent 1px);
+  background-size: 20px 20px;
+  padding: 30px !important;
+  padding-left: 60px !important;
+}
+
+.dark-mode .paper-grid {
+  background-color: var(--paper-bg-dark);
+  background-image: 
+    linear-gradient(var(--paper-line-dark) 1px, transparent 1px),
+    linear-gradient(90deg, var(--paper-line-dark) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
