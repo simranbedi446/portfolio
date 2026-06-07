@@ -5,17 +5,59 @@ export default function ContactPostcard() {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e) => {
+  const triggerMailtoFallback = () => {
+    const subject = encodeURIComponent(`Scrapbook Message from ${formData.name}`);
+    const body = encodeURIComponent(
+      `Hello Simran,\n\n${formData.message}\n\n---\nSender Details:\nName: ${formData.name}\nEmail: ${formData.email}`
+    );
+    window.location.href = `mailto:simranbedi446@gmail.com?subject=${subject}&body=${body}`;
+    setSent(true);
+    setFormData({ name: '', email: '', message: '' });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) return;
 
     setSending(true);
-    // Simulate mailing delay
-    setTimeout(() => {
+
+    const apiKey = import.meta.env.VITE_WEB3FORMS_KEY;
+
+    if (apiKey && apiKey !== 'YOUR_WEB3FORMS_ACCESS_KEY') {
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            access_key: apiKey,
+            name: formData.name,
+            email: formData.email,
+            message: formData.message,
+            subject: `New Scrapbook Message from ${formData.name}`,
+            from_name: "Portfolio Scrapbook Contact"
+          })
+        });
+        const result = await response.json();
+        if (result.success) {
+          setSent(true);
+          setFormData({ name: '', email: '', message: '' });
+        } else {
+          console.error("Web3Forms submission failed, using mailto fallback:", result.message);
+          triggerMailtoFallback();
+        }
+      } catch (err) {
+        console.error("Web3Forms error, using mailto fallback:", err);
+        triggerMailtoFallback();
+      } finally {
+        setSending(false);
+      }
+    } else {
+      triggerMailtoFallback();
       setSending(false);
-      setSent(true);
-      setFormData({ name: '', email: '', message: '' });
-    }, 1200);
+    }
   };
 
   return (
