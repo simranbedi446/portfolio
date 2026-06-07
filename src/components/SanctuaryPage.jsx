@@ -39,7 +39,7 @@ export default function SanctuaryPage() {
         
         <div className="speech-bubble">
           <div className="speech-bubble-tail" />
-          <p className="handwriting" style={{ fontSize: '1.2rem', margin: 0, lineHeight: '1.5', color: 'var(--bubble-text)' }}>
+          <p className="natural-hand" style={{ fontSize: '1.2rem', margin: 0, lineHeight: '1.6', color: 'var(--bubble-text)' }}>
             "Welcome to my creative sanctuary! I'm Simran, a Frontend Engineer. Beside me is Vinie, my virtual helper beagle. Since I love street dogs and founded Care For Strays, Vinie is here to make this portfolio feel cozy and safe!"
           </p>
         </div>
@@ -47,10 +47,10 @@ export default function SanctuaryPage() {
 
       {/* About me */}
       <motion.div variants={itemVariants}>
-        <h3 className="handwriting" style={{ fontSize: '1.9rem', margin: '0 0 8px 0', color: 'var(--text-accent)' }}>
+        <h3 className="scratchy" style={{ fontSize: '2rem', margin: '0 0 8px 0', color: 'var(--text-accent)' }}>
           About Me &amp; My Engineering Philosophy
         </h3>
-        <p style={{ fontSize: '1rem', margin: 0, lineHeight: '1.6' }}>
+        <p className="natural-hand" style={{ fontSize: '1rem', margin: 0, lineHeight: '1.7' }}>
           I am a <strong>Frontend Engineer</strong> with experience building real-time, data-driven web applications using React, Next.js, and TypeScript. I have a proven track record in developing complex dashboard interfaces, optimizing frontend performance for low-latency interactions, and collaborating cross-functionally on design systems. I am passionate about creating intuitive, high-performance interfaces that bridge the gap between complex systems and seamless user experiences.
         </p>
       </motion.div>
@@ -58,7 +58,7 @@ export default function SanctuaryPage() {
       {/* Edu + Certs grid */}
       <motion.div variants={itemVariants} className="sanctuary-grid">
         <div>
-          <h4 className="handwriting" style={{ fontSize: '1.5rem', margin: '0 0 8px 0', color: 'var(--text-collar)' }}>
+          <h4 className="scratchy" style={{ fontSize: '1.6rem', margin: '0 0 8px 0', color: 'var(--text-collar)' }}>
             🎓 My Education
           </h4>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -74,7 +74,7 @@ export default function SanctuaryPage() {
         </div>
 
         <div className="sanctuary-certs">
-          <h4 className="handwriting" style={{ fontSize: '1.5rem', margin: '0 0 8px 0', color: 'var(--text-accent)' }}>
+          <h4 className="scratchy" style={{ fontSize: '1.6rem', margin: '0 0 8px 0', color: 'var(--text-accent)' }}>
             🏆 My Certifications
           </h4>
           <ul style={{ margin: 0, paddingLeft: '15px', fontSize: '0.9rem', lineHeight: '1.6' }}>

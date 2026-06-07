@@ -49,7 +49,9 @@
   --inner-box-border: #e5e4df;
 
   /* Typography */
-  --font-handwriting: 'Caveat', cursive;
+  --font-handwriting: 'Caveat', cursive;          /* clean scrapbook handwriting */
+  --font-scratchy: 'Reenie Beanie', cursive;      /* raw, sketchy notebook style */
+  --font-natural: 'Patrick Hand', cursive;        /* casual, natural handwriting */
   --font-sans: 'Nunito', sans-serif;
 
   /* Premium Shadows */
