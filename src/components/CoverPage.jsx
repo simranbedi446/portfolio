@@ -13,11 +13,10 @@ export default function CoverPage({ onOpen }) {
         transition={{ type: 'spring', stiffness: 200, damping: 18 }}
         style={{ position: 'relative', width: '100%' }}
       >
-        <div className="tape-graphic"></div>
-        <h1 className="scratchy" style={{ fontSize: '3.4rem', margin: '10px 0 5px 0', color: 'var(--text-main)', lineHeight: '1.15' }}>
+<h1 className="handwriting" style={{ fontSize: '3rem', margin: '10px 0 5px 0', color: 'var(--text-main)', lineHeight: '1.2' }}>
           Simran's Scrapbook
         </h1>
-        <p className="natural-hand" style={{ fontSize: '1.4rem', color: 'var(--text-accent)', marginTop: '0' }}>
+        <p className="handwriting" style={{ fontSize: '1.5rem', color: 'var(--text-accent)', marginTop: '0' }}>
           Frontend Engineer • Nagpur, IN
         </p>
       </motion.div>
@@ -45,9 +44,9 @@ export default function CoverPage({ onOpen }) {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: 'spring', stiffness: 150, damping: 12, delay: 0.2 }}
         >
-          <span style={{ fontFamily: 'var(--font-natural)', fontSize: '0.88rem' }}>Next.js / React</span>
-          <span style={{ fontSize: '1.3rem', fontFamily: 'var(--font-scratchy)' }}>PORTFOLIO</span>
-          <span style={{ fontFamily: 'var(--font-natural)', fontSize: '0.88rem' }}>Care For Strays</span>
+          <span>Next.js / React</span>
+          <span style={{ fontSize: '1.2rem' }}>PORTFOLIO</span>
+          <span>Care For Strays</span>
         </motion.div>
         
         <motion.button 

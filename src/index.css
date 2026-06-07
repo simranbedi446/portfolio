@@ -49,9 +49,7 @@
   --inner-box-border: #e5e4df;
 
   /* Typography */
-  --font-handwriting: 'Caveat', cursive;          /* clean scrapbook handwriting */
-  --font-scratchy: 'Kalam', cursive;              /* beautiful natural handwriting */
-  --font-natural: 'Patrick Hand', cursive;        /* casual, natural handwriting */
+  --font-handwriting: 'Caveat', cursive;
   --font-sans: 'Nunito', sans-serif;
 
   /* Premium Shadows */

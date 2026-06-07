@@ -400,7 +400,7 @@
   background: transparent;
   border: none;
   border-bottom: 1px solid rgba(0,0,0,0.1);
-  font-family: var(--font-natural);
+  font-family: var(--font-handwriting);
   font-size: 1.2rem;
   padding: 4px 0;
   margin-bottom: 12px;
@@ -415,7 +415,7 @@
   height: 100px;
   background: transparent;
   border: none;
-  font-family: var(--font-natural);
+  font-family: var(--font-handwriting);
   font-size: 1.2rem;
   line-height: 1.4;
   color: inherit;
@@ -444,10 +444,9 @@
 
 .page-title {
   margin: 0;
-  font-family: var(--font-scratchy);
-  font-size: 2.2rem;
+  font-family: var(--font-handwriting);
+  font-size: 2rem;
   color: var(--beagle-gold-dark);
-  letter-spacing: 0.5px;
 }
 .dark-mode .page-title { color: var(--beagle-gold-light); }
 
@@ -542,7 +541,6 @@
   flex-grow: 1;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
   transition: background 0.3s, border-color 0.3s;
-  font-family: var(--font-natural);
 }
 .speech-bubble-tail {
   position: absolute;
@@ -586,7 +584,6 @@
   cursor: pointer;
   font-size: 1.3rem;
   font-weight: bold;
-  font-family: var(--font-natural);
 }
 .mood-grid {
   display: grid;
@@ -655,10 +652,8 @@
 ::-webkit-scrollbar-thumb:hover { background: var(--beagle-gold-dark); }
 
 /* ─── Utility ─── */
-.handwriting    { font-family: var(--font-handwriting); font-weight: 600; letter-spacing: 0.5px; }
-.scratchy       { font-family: var(--font-scratchy); font-weight: 700; letter-spacing: 0.3px; line-height: 1.3; }
-.natural-hand   { font-family: var(--font-natural); line-height: 1.5; }
-.text-center    { text-align: center; }
+.handwriting { font-family: var(--font-handwriting); font-weight: 600; letter-spacing: 0.5px; }
+.text-center { text-align: center; }
 
 /* ═══════════════════════════════════════════════════════════
    RESPONSIVE STYLES

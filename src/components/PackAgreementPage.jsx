@@ -50,10 +50,10 @@ export default function PackAgreementPage() {
   return (
     <div className="paper-lined" style={{ minHeight: '480px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <div style={{ marginBottom: '5px' }}>
-        <h3 className="scratchy" style={{ fontSize: '2rem', margin: '0 0 10px 0', color: 'var(--text-accent)' }}>
+        <h3 className="handwriting" style={{ fontSize: '1.8rem', margin: '0 0 10px 0', color: 'var(--text-accent)' }}>
           My Engineering Pack Values
         </h3>
-        <p className="natural-hand" style={{ margin: 0, fontSize: '0.98rem', color: 'var(--text-subtle)' }}>
+        <p style={{ margin: 0, fontSize: '0.98rem', color: 'var(--text-subtle)' }}>
           A productive frontend development flow thrives on mutual trust. Here are the core team values I stand for:
         </p>
       </div>
@@ -75,8 +75,8 @@ export default function PackAgreementPage() {
               {rule.emoji}
             </span>
             <div>
-              <strong className="natural-hand" style={{ fontSize: '1.05rem', color: 'var(--text-main)', display: 'block' }}>{rule.title}</strong>
-              <p className="natural-hand" style={{ fontSize: '0.92rem', margin: '2px 0 0 0', lineHeight: '1.5' }}>{rule.desc}</p>
+              <strong style={{ fontSize: '1.08rem', color: 'var(--text-main)' }}>{rule.title}</strong>
+              <p style={{ fontSize: '0.92rem', margin: '2px 0 0 0', lineHeight: '1.4' }}>{rule.desc}</p>
             </div>
           </motion.div>
         ))}
