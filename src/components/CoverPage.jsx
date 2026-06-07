@@ -46,7 +46,7 @@ export default function CoverPage({ onOpen }) {
           flex: 1,
           display: 'flex',
           alignItems: 'center',
-          minHeight: '175px',
+          minHeight: '250px',
         }}
       >
         <VinieToyStory />
