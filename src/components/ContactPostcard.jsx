@@ -1,53 +1,57 @@
 import React, { useState } from 'react';
 
+// ─────────────────────────────────────────────────────────────
+//  Web3Forms — free & works on every live deployment instantly
+//  Get your key at: https://web3forms.com  (enter your email,
+//  they send the access key immediately, no sign-up required)
+// ─────────────────────────────────────────────────────────────
+const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || 'YOUR_WEB3FORMS_KEY';
+
 export default function ContactPostcard() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
-
-  const triggerMailtoFallback = () => {
-    const subject = encodeURIComponent(`Scrapbook Message from ${formData.name}`);
-    const body = encodeURIComponent(
-      `Hello Simran,\n\n${formData.message}\n\n---\nSender Details:\nName: ${formData.name}\nEmail: ${formData.email}`
-    );
-    window.location.href = `mailto:simranbedi446@gmail.com?subject=${subject}&body=${body}`;
-    setSent(true);
-    setFormData({ name: '', email: '', message: '' });
-  };
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) return;
 
     setSending(true);
+    setError('');
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/simranbedi446@gmail.com", {
-        method: "POST",
+      const payload = {
+        access_key: WEB3FORMS_KEY,
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+        subject: `🐾 New Postcard Bark from ${formData.name}`,
+        from_name: 'Simran\'s Portfolio',
+        replyto: formData.email,
+        redirect: 'false',
+      };
+
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-          _subject: `New Scrapbook Message from ${formData.name}`,
-          _honey: "", // Honeypot spam protection
-          _captcha: "false" // Disable captcha for clean ajax flow
-        })
+        body: JSON.stringify(payload),
       });
-      
-      if (response.ok) {
+
+      const data = await res.json();
+
+      if (data.success) {
         setSent(true);
         setFormData({ name: '', email: '', message: '' });
       } else {
-        console.error("Formsubmit failed, trying fallback...");
-        triggerMailtoFallback();
+        setError('Delivery failed — try sending directly at simranbedi446@gmail.com 🐾');
       }
     } catch (err) {
-      console.error("Formsubmit error, using mailto fallback:", err);
-      triggerMailtoFallback();
+      console.error('Web3Forms error:', err);
+      setError('Network hiccup! Try emailing simranbedi446@gmail.com directly.');
     } finally {
       setSending(false);
     }
@@ -60,7 +64,7 @@ export default function ContactPostcard() {
           Send a Postcard Bark
         </h3>
         <p style={{ margin: 0, fontSize: '0.95rem', color: 'var(--text-subtle)' }}>
-          Have a role in mind, want to talk stray dog welfare, or talk about React performance? Stamp and send a message:
+          Have a role in mind, want to talk stray dog welfare, or geek out about React performance? Stamp and send a message:
         </p>
       </div>
 
@@ -68,8 +72,8 @@ export default function ContactPostcard() {
         <form onSubmit={handleSubmit} className="postcard-container">
           {/* Left section: inputs */}
           <div className="postcard-left">
-            <input 
-              type="text" 
+            <input
+              type="text"
               placeholder="Your Name..."
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -77,9 +81,9 @@ export default function ContactPostcard() {
               required
               disabled={sending}
             />
-            
-            <input 
-              type="email" 
+
+            <input
+              type="email"
               placeholder="Your Email..."
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -88,7 +92,7 @@ export default function ContactPostcard() {
               disabled={sending}
             />
 
-            <textarea 
+            <textarea
               placeholder="Write your message here..."
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -96,6 +100,12 @@ export default function ContactPostcard() {
               required
               disabled={sending}
             />
+
+            {error && (
+              <p style={{ color: 'var(--text-collar)', fontSize: '0.85rem', marginTop: '8px', fontFamily: 'var(--font-handwriting)' }}>
+                ⚠️ {error}
+              </p>
+            )}
           </div>
 
           {/* Right section: Stamp and Contact info */}
@@ -120,20 +130,20 @@ export default function ContactPostcard() {
                 📞 +91-9673334212
               </div>
               <div style={{ marginTop: '4px' }}>
-                🔗 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-accent)', fontWeight: 'bold', textDecoration: 'underline' }}>LinkedIn Profile</a>
+                🔗 <a href="https://linkedin.com/in/simranbedi446" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-accent)', fontWeight: 'bold', textDecoration: 'underline' }}>LinkedIn Profile</a>
               </div>
             </div>
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="control-btn"
               disabled={sending}
-              style={{ 
+              style={{
                 marginTop: '15px',
-                backgroundColor: 'var(--collar-red)', 
-                color: 'white', 
-                borderColor: 'var(--beagle-gold-dark)', 
-                padding: '8px 20px', 
+                backgroundColor: 'var(--collar-red)',
+                color: 'white',
+                borderColor: 'var(--beagle-gold-dark)',
+                padding: '8px 20px',
                 fontSize: '1.1rem',
                 width: '100%',
                 justifyContent: 'center',
@@ -153,12 +163,12 @@ export default function ContactPostcard() {
           <p style={{ maxWidth: '400px', fontSize: '0.98rem', lineHeight: '1.5', margin: '0 0 20px 0' }}>
             Your postcard has been stamped and delivered to me! I will get back to you at your email address shortly!
           </p>
-          <button 
+          <button
             className="control-btn"
             onClick={() => setSent(false)}
-            style={{ 
-              backgroundColor: 'var(--beagle-gold)', 
-              color: 'white', 
+            style={{
+              backgroundColor: 'var(--beagle-gold)',
+              color: 'white',
               borderColor: 'var(--beagle-gold-dark)',
               padding: '6px 15px',
               fontSize: '1rem'

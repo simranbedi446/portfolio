@@ -509,8 +509,16 @@
   font-size: 1.05rem;
 }
 
-/* Responsiveness adjustments */
+/* ─────────────────────────────────────────────────────
+   RESPONSIVE STYLES — tablet, mobile, small mobile
+───────────────────────────────────────────────────── */
+
+/* Tablet & smaller desktop */
 @media (max-width: 900px) {
+  .notebook-wrapper {
+    max-width: 100%;
+  }
+
   .index-tabs {
     position: relative;
     right: 0;
@@ -529,6 +537,7 @@
     border-left: 2px solid rgba(0,0,0,0.1);
     border-bottom: none;
     padding: 6px 12px;
+    font-size: 1rem;
   }
   
   .index-tab:hover {
@@ -556,14 +565,28 @@
   .notebook-page {
     border-left: none;
     box-shadow: 2px 2px 8px rgba(0,0,0,0.12);
+    min-height: unset;
   }
   
   .page-header {
     padding-left: 20px;
+    padding-right: 15px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .page-title {
+    font-size: 1.8rem;
   }
   
   .page-content {
-    padding-left: 20px;
+    padding: 10px 15px 25px 15px;
+  }
+
+  .paper-lined,
+  .paper-grid {
+    padding-left: 20px !important;
+    padding-right: 15px !important;
   }
   
   .postcard-container {
@@ -575,6 +598,134 @@
     border-bottom: 1px solid rgba(140, 115, 85, 0.3);
     padding-right: 0;
     padding-bottom: 20px;
+  }
+
+  .postcard-right {
+    align-items: flex-start;
+    padding-left: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .stamp-box {
+    transform: none;
+  }
+
+  .controls-bar {
+    position: relative;
+    top: 0;
+    right: 0;
+    justify-content: center;
+    padding: 10px 0 5px;
+  }
+
+  .corner-guard {
+    display: none;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  body {
+    align-items: flex-start;
+    padding: 0;
+  }
+
+  #root {
+    padding: 10px;
+    align-items: flex-start;
+  }
+
+  .notebook-binder {
+    padding: 8px;
+    border-radius: 12px;
+  }
+
+  .index-tab {
+    padding: 5px 9px;
+    font-size: 0.88rem;
+  }
+
+  .page-header {
+    padding: 10px 12px;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .page-content {
+    padding: 8px 12px 20px 12px;
+  }
+
+  .paper-lined,
+  .paper-grid {
+    padding: 15px !important;
+    padding-left: 15px !important;
+  }
+
+  .postcard-container {
+    padding: 12px;
+  }
+
+  .postcard-input {
+    font-size: 1.1rem;
+  }
+
+  .postcard-textarea {
+    font-size: 1.1rem;
+    height: 90px;
+  }
+
+  .postcard-right {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .beagle-badge {
+    width: 85px;
+    height: 85px;
+    font-size: 0.8rem;
+  }
+
+  .treat-card {
+    transform: none;
+  }
+
+  .scrapbook-card {
+    transform: none;
+  }
+
+  .controls-bar {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .control-btn {
+    font-size: 0.95rem;
+    padding: 5px 10px;
+  }
+
+  .success-box {
+    padding: 20px 12px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 380px) {
+  .index-tab {
+    padding: 4px 7px;
+    font-size: 0.8rem;
+  }
+
+  .page-title {
+    font-size: 1.3rem;
+  }
+
+  .control-btn {
+    font-size: 0.85rem;
+    padding: 4px 8px;
   }
 }
 
