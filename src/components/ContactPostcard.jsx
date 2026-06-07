@@ -21,41 +21,34 @@ export default function ContactPostcard() {
 
     setSending(true);
 
-    const apiKey = import.meta.env.VITE_WEB3FORMS_KEY;
-
-    if (apiKey && apiKey !== 'YOUR_WEB3FORMS_ACCESS_KEY') {
-      try {
-        const response = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-          },
-          body: JSON.stringify({
-            access_key: apiKey,
-            name: formData.name,
-            email: formData.email,
-            message: formData.message,
-            subject: `New Scrapbook Message from ${formData.name}`,
-            from_name: "Portfolio Scrapbook Contact"
-          })
-        });
-        const result = await response.json();
-        if (result.success) {
-          setSent(true);
-          setFormData({ name: '', email: '', message: '' });
-        } else {
-          console.error("Web3Forms submission failed, using mailto fallback:", result.message);
-          triggerMailtoFallback();
-        }
-      } catch (err) {
-        console.error("Web3Forms error, using mailto fallback:", err);
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/simranbedi446@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _subject: `New Scrapbook Message from ${formData.name}`,
+          _honey: "", // Honeypot spam protection
+          _captcha: "false" // Disable captcha for clean ajax flow
+        })
+      });
+      
+      if (response.ok) {
+        setSent(true);
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        console.error("Formsubmit failed, trying fallback...");
         triggerMailtoFallback();
-      } finally {
-        setSending(false);
       }
-    } else {
+    } catch (err) {
+      console.error("Formsubmit error, using mailto fallback:", err);
       triggerMailtoFallback();
+    } finally {
       setSending(false);
     }
   };
